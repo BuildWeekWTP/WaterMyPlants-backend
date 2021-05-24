@@ -5,7 +5,7 @@ module.exports = {
   findBy,
   findById,
   getAll,
-}
+} // change
 
 async function add(user) {
   const [user_id] = await db('users').insert(user, 'user_id');
@@ -22,7 +22,7 @@ function findBy(filter) {
 
 function findById(id) {
   return db('users as u')
-    .select('u.user_id', 'u.user_email', 'u.user_phone_number')
+    .select('u.user_id', 'u.user_username', 'u.user_email', 'u.user_phone_number')
     .where('u.user_id', id)
     .first();
 }

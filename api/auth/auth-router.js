@@ -14,7 +14,7 @@ router.post('/register', (req, res, next) => {
 
   Users.add(user)
     .then(saved => {
-      // console.log(saved)
+      console.log(saved)
       res.status(201).json({
         message: `Great to have you, ${saved.user_username}`
       });

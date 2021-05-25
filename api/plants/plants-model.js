@@ -14,8 +14,9 @@ async function add(plant){
       plant_species: plant.plant_species,
       plant_h2ofrequency: plant.plant_h2ofrequency,
       plant_image_url: plant.plant_image_url,
-    }, 'plant_id');
-  // const newPlant = findById(plant_id);
+    }, 
+    'plant_id' // this part is specifying what we want the promise to return
+  );
   await db('users_plants')
     .insert({
       user_id: plant.user_id,

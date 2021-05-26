@@ -2,10 +2,11 @@ const bcrypt = require('bcryptjs');
 const router = require('express').Router();
 
 const Users = require('../users/users-model');
+const { checkUsernameFree, checkPasswordLength } = require('./auth-middleware');
 
 const buildToken = require('./token-builder');
 
-router.post('/register', (req, res, next) => {
+router.post('/register', checkUsernameFree, checkPasswordLength, (req, res, next) => {
   let user = req.body;
 
   const rounds = process.env.BCRYPT_ROUNDS || 8;

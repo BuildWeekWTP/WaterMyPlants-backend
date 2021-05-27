@@ -3,7 +3,9 @@ const router = require('express').Router()
 const Users = require('./users-model.js')
 const Plants = require('../plants/plants-model.js')
 
-router.get('/', (req, res, next) => {
+const restricted = require('../auth/restricted-middleware')
+
+router.get('/', restricted, (req, res, next) => {
   Users.getAll()
     .then(users => {
       res.status(200).json(users);

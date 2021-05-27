@@ -8,7 +8,7 @@ function tokenBuilder(user) { // { id, username, role }
   };
   const options = {
    expiresIn: '1d',
-  };
+  }; 
   const token = jwt.sign(
     payload,
     JWT_SECRET,

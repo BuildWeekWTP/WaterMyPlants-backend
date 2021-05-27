@@ -1,11 +1,12 @@
 const bcrypt = require('bcryptjs');
-const buildToken = require('./token-builder');
 const router = require('express').Router();
 
 const Users = require('../users/users-model');
+const { checkUsernameFree, checkPasswordLength } = require('./auth-middleware');
 
+const buildToken = require('./token-builder');
 
-router.post('/register', (req, res, next) => {
+router.post('/register', checkUsernameFree, checkPasswordLength, (req, res, next) => {
   let user = req.body;
 
   const rounds = process.env.BCRYPT_ROUNDS || 8;
@@ -29,6 +30,7 @@ router.post('/login', (req, res, next) => {
   Users.findBy({ user_username })
     .then(([user]) => {
       if (user && bcrypt.compareSync(user_password, user.user_password)){
+        // req.session.user = user;
         const token = buildToken(user)
         res.status(200).json({
           message: `Welcome back ${user.user_username}`,

@@ -33,10 +33,10 @@ function findById(plant_id) {
 }
 
 function findByUserId(user_id){
-return db('plants as p')
-  .leftJoin('users_plants as up', 'p.plant_id', 'up.plant_id')
-  .where('up.user_id', user_id)
-  .select('p.plant_id', 'p.plant_nickname', 'p.plant_species', 'p.plant_h2ofrequency', 'p.plant_image_url')
+  return db('plants as p')
+    .leftJoin('users_plants as up', 'p.plant_id', 'up.plant_id')
+    .where('up.user_id', user_id)
+    .select('p.plant_id', 'p.plant_nickname', 'p.plant_species', 'p.plant_h2ofrequency', 'p.plant_image_url')
 }
 
 function getAll(){
